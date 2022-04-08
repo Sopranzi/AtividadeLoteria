@@ -1,13 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+//useState é um hook do React
+import React, { useState } from 'react'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+export default class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      texto: "Texto inicial",
+      contador: 5
+    }
+  }
+  render(){
+    return(
+      <View style={styles.container}>
+        <Text>{this.state.contador}</Text>
+        <Button 
+          title="OK"
+          onPress={() => {this.setState({contador: this.state.contador + 1})}}
+          />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -18,3 +32,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// export default function App() {
+//   const [texto, setTexto] = useState('Texto inicial')
+
+//   return (
+//     <View style={styles.container}>
+//       <Text>{texto}</Text>
+//       <Button 
+//         title="OK"
+//         onPress={() => setTexto("Outro texto")}
+//       />
+//     </View>
+//   );
+// }
+
