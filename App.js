@@ -1,27 +1,36 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
-//useState é um hook do React
-import React, { useState } from 'react'
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React, {useState} from 'react';
 
+export default function App() {
+  var loteria = {
+    sorteados: [],
+    sortearNumero: function () {
+        for (let i = 0; i < 6; i++) {
+            let numero = Math.round(Math.random() * 59)
+            for (let j = 0; j < this.sorteados.length; j++)
+                while (numero == this.sorteados[j]) {
+                    numero++
+                }
+            this.sorteados.push(numero)
+        }
 
-export default class App extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      texto: "Texto inicial",
-      contador: 5
+        console.log(this.sorteados)
+     
     }
-  }
-  render(){
-    return(
-      <View style={styles.container}>
-        <Text>{this.state.contador}</Text>
-        <Button 
-          title="OK"
-          onPress={() => {this.setState({contador: this.state.contador + 1})}}
-          />
-      </View>
-    )
-  }
+}
+loteria.sortearNumero()
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={{marginBottom: '10px'}}>{loteria.sorteados.join(', ')}</Text>
+      <Button title="Sortear" onPress={() => loteria.sortearNumero()}/>
+      <StatusBar style="auto" />
+     
+    </View>
+  
+  );
 }
 
 const styles = StyleSheet.create({
@@ -33,17 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// export default function App() {
-//   const [texto, setTexto] = useState('Texto inicial')
-
-//   return (
-//     <View style={styles.container}>
-//       <Text>{texto}</Text>
-//       <Button 
-//         title="OK"
-//         onPress={() => setTexto("Outro texto")}
-//       />
-//     </View>
-//   );
-// }
 
