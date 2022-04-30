@@ -2,7 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React, {useState} from 'react';
 
+
+
 export default function App() {
+  const [numeros, setNumeros] = useState([])
+  const imprimenumeros = (a) => {
+    setNumeros(a)
+  }
   var loteria = {
     sorteados: [],
     sortearNumero: function () {
@@ -16,15 +22,17 @@ export default function App() {
         }
 
         console.log(this.sorteados)
-     
+     imprimenumeros(this.sorteados)
     }
+    
 }
-loteria.sortearNumero()
+
+//loteria.sortearNumero()
 
 
   return (
     <View style={styles.container}>
-      <Text style={{marginBottom: '10px'}}>{loteria.sorteados.join(', ')}</Text>
+      <Text style={{marginBottom: '10px'}}>{numeros.join(', ')}</Text>
       <Button title="Sortear" onPress={() => loteria.sortearNumero()}/>
       <StatusBar style="auto" />
      
